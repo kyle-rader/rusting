@@ -7,4 +7,8 @@ fn main() {
     }
 
     println!("x outer is {}", x);
+
+    let x = "I'm a string!";
+
+    println!("{}", x);
 }
