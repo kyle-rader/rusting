@@ -11,4 +11,23 @@ fn main() {
     let x = "I'm a string!";
 
     println!("{}", x);
+
+    println!("\nBorrowing:");
+    borrow();
+}
+
+fn borrow() {
+    let mut x = 10;
+    println!("x is {}", x);
+
+    {
+        let y = &mut x;
+        println!("y is {}", y);
+
+        *y += *y * 2;
+
+        println!("now y is {}", y);
+    }
+
+    println!("now x is {}", x);
 }

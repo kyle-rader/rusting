@@ -18,4 +18,9 @@ fn main() {
     for (i, val) in (1..11).enumerate() {
         println!("{}: {}", i, val);
     }
+
+    let v = vec!["one", "two", "three", "four"];
+    for num in &v {
+        println!("In v we have {}", num);
+    }
 }
