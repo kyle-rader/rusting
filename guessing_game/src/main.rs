@@ -21,9 +21,13 @@ fn main() {
 
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
-            Err(_) => continue,
+            Err(_) => {
+                println!("No... a number please....");
+                continue;
+            },
         };
 
+        // Only increment legit guesses
         guess_count += 1;
         println!("You guessed: {}", guess);
 
