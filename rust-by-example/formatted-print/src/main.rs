@@ -38,6 +38,24 @@ impl fmt::Display for Point2 {
     }
 }
 
+// My Complex structure
+struct Complex {
+    real: f64,
+    imag: f64,
+}
+
+impl fmt::Display for Complex {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{real} + {imag}i", real=self.real, imag=self.imag)
+    }
+}
+
+impl fmt::Debug for Complex {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Complex {{ real: {real}, imag: {imag} }}", real=self.real, imag=self.imag)
+    }
+}
+
 fn main() {
     println!("Hello, formatted print!");
 
@@ -73,6 +91,6 @@ fn main() {
     println!("And Deep: {:?}", Deep(Structure(3)));
 
     println!("A MinMax: debug: {obj:?}  display: {obj}", obj=MinMax(23, 56));
-    println!("A Point : debug: {obj:?}  display: {obj}", obj=Point2 { x: 3.3, y: 56. })
-
+    println!("A Point : debug: {obj:?}  display: {obj}", obj=Point2 { x: 3.3, y: 56. });
+    println!("My Complex struct: {0}  Debugged: {0:?}", Complex { real: 4.6, imag: 8.9 });
 }
