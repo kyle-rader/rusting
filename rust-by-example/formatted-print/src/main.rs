@@ -56,6 +56,31 @@ impl fmt::Debug for Complex {
     }
 }
 
+// Define a structure named `List` containing a `Vec`.
+struct List(Vec<i32>);
+
+impl fmt::Display for List {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        // Dereference `self` and create a reference to `vec`
+        // via destructuring.
+        let List(ref vec) = *self;
+
+        try!(write!(f, "["));
+
+        // Iterate over `vec` in `v` while enumerating the iteration
+        // count in `count`.
+        for (count, v) in vec.iter().enumerate() {
+            // For every element except the first, add a comma
+            // before calling `write!`. Use `try!` to return on errors.
+            if count != 0 { try!(write!(f, ", ")); }
+            try!(write!(f, "{i}: {val}", i=count, val=v));
+        }
+
+        // Close the opened bracket and return a fmt::Result value
+        write!(f, "]")
+    }
+}
+
 fn main() {
     println!("Hello, formatted print!");
 
@@ -93,4 +118,6 @@ fn main() {
     println!("A MinMax: debug: {obj:?}  display: {obj}", obj=MinMax(23, 56));
     println!("A Point : debug: {obj:?}  display: {obj}", obj=Point2 { x: 3.3, y: 56. });
     println!("My Complex struct: {0}  Debugged: {0:?}", Complex { real: 4.6, imag: 8.9 });
+
+    println!("My List: {}", List(vec![2, 4, 6, 8, 10]));
 }
