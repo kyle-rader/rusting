@@ -1,3 +1,42 @@
+use std::fmt;
+
+
+#[derive(Debug)]
+struct Structure(i32);
+
+#[derive(Debug)]
+struct Deep(Structure);
+
+impl fmt::Display for Structure {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
+// A structure holding 2 numbers `Debug` will be derived so the results can be contrasted with `Display`
+#[derive(Debug)]
+struct MinMax(i64, i64);
+
+impl fmt::Display for MinMax {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({}, {})", self.0, self.1)
+    }
+}
+
+// Define a structure where the fields are nameable for comparison.
+#[derive(Debug)]
+struct Point2 {
+    x: f64,
+    y: f64,
+}
+
+// Similarly, implement for Point2
+impl fmt::Display for Point2 {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        // Customize so only `x` and `y` are denoted.
+        write!(f, "{{ x: {}, y: {} }}", self.x, self.y)
+    }
+}
 
 fn main() {
     println!("Hello, formatted print!");
@@ -26,5 +65,14 @@ fn main() {
     for special_num in &special_nums {
         println!("This is a special number: {val:.3}", val=special_num);
     }
+
+    println!("\nDebugging stuff:");
+
+    println!("Now {:?} is a thing!", Structure(3));
+
+    println!("And Deep: {:?}", Deep(Structure(3)));
+
+    println!("A MinMax: debug: {obj:?}  display: {obj}", obj=MinMax(23, 56));
+    println!("A Point : debug: {obj:?}  display: {obj}", obj=Point2 { x: 3.3, y: 56. })
 
 }
